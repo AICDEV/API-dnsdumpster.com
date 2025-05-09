@@ -119,7 +119,7 @@ class DNSDumpsterAPI(object):
         # XLS hosts.
         # eg. tsebo.com-201606131255.xlsx
         try:
-            pattern = r'/static/xls/' + domain + '-[0-9]{12}\.xlsx'
+            pattern = r'/static/xlsx/' + re.escape(domain) + r'-[a-f0-9\-]{36}\.xlsx'
             xls_url = re.findall(pattern, req.content.decode('utf-8'))[0]
             xls_url = 'https://dnsdumpster.com' + xls_url
             xls_data = base64.b64encode(self.session.get(xls_url).content)
